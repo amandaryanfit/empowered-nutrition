@@ -65,7 +65,7 @@ function buildApp(){
     <div id="clock" style="color:rgba(239,200,199,.7);font-size:11px;font-family:var(--fc)">9:41</div>
   </div>
 </div>
-<div class="screen active" id="sc-home" style="overflow:hidden;display:flex;flex-direction:column;flex:1">
+<div class="screen active" id="sc-home">
   <div class="goals-bar" style="background:linear-gradient(135deg,var(--cr) 0%,#8B1A19 100%)">
     <div class="g-hdr"><div class="g-title" id="g-title-lbl">My weekly targets</div><button class="g-edit" onclick="toggleGF()">Edit</button><button class="g-edit" onclick="nav('profile')" style="margin-left:6px">Profile</button></div>
     <div class="g-nums">
