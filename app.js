@@ -24,23 +24,12 @@ function buildApp(){
   const root=e('APP_ROOT');
   root.innerHTML=`
 <div class="view active" id="v-login">
-<div style="display:flex;flex-direction:column;height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--cr)">
+<div style="display:flex;flex-direction:column;min-height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--cr)">
   <div style="padding:36px 28px 20px;display:flex;flex-direction:column;align-items:flex-start">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-      <div style="width:42px;height:42px;background:rgba(250,248,246,.18);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-        <svg viewBox="0 0 40 40" width="24" height="24" fill="none">
-          <circle cx="20" cy="20" r="18" stroke="#EFC8C7" stroke-width="2"/>
-          <path d="M12 24c0-4 3.6-7 8-7s8 3 8 7" stroke="#FAF8F6" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="20" cy="14" r="4" fill="#EFC8C7"/>
-          <path d="M20 28v-4M17 26h6" stroke="#EFC8C7" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div>
-        <div style="color:#FAF8F6;font-size:20px;font-family:var(--fh);line-height:1.1">Shift Society</div>
-        <div style="color:var(--pl);font-size:11px;font-family:var(--fc);letter-spacing:.08em">EMPOWERED NUTRITION</div>
-      </div>
+    <div style="margin-bottom:20px">
+      <img src="/logo-light.jpg" alt="Shift Society" style="width:180px;height:auto;display:block"/>
     </div>
-    <div style="color:rgba(239,200,199,.55);font-size:11px;font-family:var(--fc);letter-spacing:.1em;text-transform:uppercase">Make shifts, not sacrifices</div>
+    <div style="color:rgba(239,200,199,.55);font-size:11px;font-family:var(--fc);letter-spacing:.1em;text-transform:uppercase">Empowered Nutrition</div>
   </div>
   <div class="login-form" style="flex:1;border-radius:28px 28px 0 0;padding:28px 24px 48px">
     <div class="login-title">Welcome back</div>
@@ -67,9 +56,9 @@ function buildApp(){
 <div class="view" id="v-app">
 <div style="background:var(--cr);padding:44px 18px 8px;display:flex;justify-content:space-between;align-items:flex-start;flex-shrink:0">
   <div>
-    <div style="color:rgba(239,200,199,.55);font-size:9px;font-family:var(--fc);letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px">Shift Society</div>
-    <div id="greeting" style="color:#FAF8F6;font-size:24px;font-family:var(--fh);line-height:1.05">Good morning,</div>
-    <div id="welcome-name" style="color:var(--pl);font-size:22px;font-family:var(--fh);line-height:1.1"></div>
+    <img src="/logo-light.jpg" alt="Shift Society" style="width:110px;height:auto;display:block;margin-bottom:4px"/>
+    <div id="greeting" style="color:var(--pl);font-size:13px;font-family:var(--fc);line-height:1.2">Good morning,</div>
+    <div id="welcome-name" style="color:#FAF8F6;font-size:20px;font-family:var(--fh);line-height:1.1"></div>
   </div>
   <div style="display:flex;align-items:center;gap:5px;margin-top:4px">
     <svg viewBox="0 0 16 12" width="13" height="10" fill="#FAF8F6" opacity=".8"><rect x="0" y="3" width="3" height="9" rx="1"/><rect x="4.5" y="2" width="3" height="10" rx="1"/><rect x="9" y="0" width="3" height="12" rx="1"/><rect x="13.5" y="1" width="2.5" height="11" rx="1" opacity=".3"/></svg>
@@ -148,7 +137,7 @@ function buildApp(){
 
 <div class="view" id="v-admin">
 <div class="admin-view"><div class="adm-wrap">
-  <div class="adm-header"><div><div class="adm-logo">Empowered Nutrition</div><div class="adm-sub">Admin dashboard</div></div><button class="adm-btn" onclick="showLogin()">Sign out</button></div>
+  <div class="adm-header"><div><img src="/logo-dark.jpg" alt="Shift Society" style="width:120px;height:auto;display:block;margin-bottom:4px"/><div class="adm-sub" style="color:var(--pl)">Admin dashboard</div></div><button class="adm-btn" onclick="showLogin()">Sign out</button></div>
   <div class="adm-card"><div class="adm-ct">Active clients</div><div id="client-list"></div>
     <button class="btn btn-g btn-sm" style="margin-top:12px" onclick="toggleAddForm()">+ Add new client</button>
     <div class="add-form" id="add-form">
@@ -402,7 +391,7 @@ function editClient(email){const c=clients.find(x=>x.email===email);if(!c)return
 function inviteTeam(){const n=(e('tm-name')||{}).value||'',te=(e('tm-email')||{}).value||'';if(!n.trim()||!te.trim()){alert('Name and email required.');return;}alert('Invite noted for '+n+' ('+te+').\n\nWhen Firebase is connected, a real admin invite email will be sent automatically.');['tm-name','tm-email'].forEach(id=>{const el=e(id);if(el)el.value='';});}
 function renderClients(){const el=e('client-list');if(!el)return;if(!clients.length){el.innerHTML='<div style="font-size:13px;color:var(--mu);font-weight:300;padding:10px 0">No clients yet. Add your first client above.</div>';return;}let h='';clients.forEach(c=>{const init=(c.name||'?').split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();const la=c.lastActive?new Date(c.lastActive).toLocaleDateString('en-US',{month:'short',day:'numeric'}):'Never';const logPill=c.hasLoggedIn?'<span class="cs-pill cs-g">Active</span>':'<span class="cs-pill cs-w">Never logged in</span>';const tgts=c.profile&&c.profile.cal?'<span class="cs-pill cs-gr">'+c.profile.cal+' cal &middot; '+(c.profile.pro||'?')+'g P</span>':'<span class="cs-pill cs-w">No targets set</span>';h+='<div class="client-row"><div class="client-av">'+init+'</div><div class="client-info"><div class="client-name">'+escH(c.name)+'</div><div class="client-email">'+escH(c.email)+' &middot; Last active: '+la+'</div><div class="client-stats">'+logPill+tgts+'</div></div><div class="client-actions"><button class="ca-btn ca-e" onclick="editClient(\''+c.email+'\')">Edit</button><button class="ca-btn ca-d" onclick="delClient(\''+c.email+'\')">Remove</button></div></div>';});el.innerHTML=h;}
 
-buildApp();
+try{buildApp();}catch(err){document.getElementById("APP_ROOT").innerHTML='<div style="padding:40px;font-family:sans-serif;color:#6E1514;text-align:center"><div style="font-size:24px;margin-bottom:12px">&#9888;</div><div style="font-size:14px;margin-bottom:8px">App failed to load</div><div style="font-size:11px;color:#999">Error: '+err.message+'</div></div>';}
 ld();
 tick();setInterval(tick,10000);
 if(P.name&&P.email&&!P.firstLogin){showV('app');updG();nav('home');}else{showV('login');}
