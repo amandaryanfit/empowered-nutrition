@@ -27,7 +27,7 @@ function buildApp(){
 <div style="display:flex;flex-direction:column;min-height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--cr)">
   <div style="padding:36px 28px 20px;display:flex;flex-direction:column;align-items:flex-start">
     <div style="margin-bottom:20px">
-      <img src="/logo-light.jpg" alt="Shift Society" style="width:180px;height:auto;display:block"/>
+      <img src="/logo-light.jpg" alt="Shift Society" style="width:110px;height:auto;display:block"/>
     </div>
     <div style="color:rgba(239,200,199,.55);font-size:11px;font-family:var(--fc);letter-spacing:.1em;text-transform:uppercase">Empowered Nutrition</div>
   </div>
