@@ -54,36 +54,42 @@ function buildApp(){
 </div>
 
 <div class="view" id="v-app">
-<div style="background:var(--cr);padding:44px 18px 8px;display:flex;justify-content:space-between;align-items:flex-start;flex-shrink:0">
-  <div>
-    <img src="/logo-light.jpg" alt="Shift Society" style="width:110px;height:auto;display:block;margin-bottom:4px"/>
-    <div id="greeting" style="color:var(--pl);font-size:13px;font-family:var(--fc);line-height:1.2">Good morning,</div>
-    <div id="welcome-name" style="color:#FAF8F6;font-size:20px;font-family:var(--fh);line-height:1.1"></div>
+<div style="background:var(--cr);padding:44px 18px 12px;flex-shrink:0">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+    <div>
+      <div style="color:rgba(239,200,199,.65);font-size:10px;font-family:var(--fc);letter-spacing:.06em;margin-bottom:1px">Welcome back,</div>
+      <div id="welcome-name" style="color:#FAF8F6;font-size:22px;font-family:var(--fh);line-height:1.05"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <button onclick="toggleHamburger()" style="background:rgba(250,248,246,.15);border:none;border-radius:8px;padding:7px 9px;cursor:pointer;display:flex;flex-direction:column;gap:4px;align-items:center" id="hamburger-btn">
+        <span style="display:block;width:18px;height:1.5px;background:#FAF8F6;border-radius:2px"></span>
+        <span style="display:block;width:18px;height:1.5px;background:#FAF8F6;border-radius:2px"></span>
+        <span style="display:block;width:18px;height:1.5px;background:#FAF8F6;border-radius:2px"></span>
+      </button>
+      <img src="/logo-light.jpg" alt="Shift Society" style="width:80px;height:auto;display:block;opacity:.9"/>
+    </div>
   </div>
-  <div style="display:flex;align-items:center;gap:5px;margin-top:4px">
-    <svg viewBox="0 0 16 12" width="13" height="10" fill="#FAF8F6" opacity=".8"><rect x="0" y="3" width="3" height="9" rx="1"/><rect x="4.5" y="2" width="3" height="10" rx="1"/><rect x="9" y="0" width="3" height="12" rx="1"/><rect x="13.5" y="1" width="2.5" height="11" rx="1" opacity=".3"/></svg>
-    <div id="clock" style="color:rgba(239,200,199,.7);font-size:11px;font-family:var(--fc)">9:41</div>
+  <div id="hamburger-menu" style="display:none;background:rgba(90,10,10,.95);border-radius:12px;padding:6px;margin-bottom:4px">
+    <button onclick="toggleGF();toggleHamburger()" style="display:block;width:100%;text-align:left;background:none;border:none;color:#FAF8F6;font-size:13px;font-family:var(--fs);padding:10px 12px;cursor:pointer;border-radius:8px">Edit macro targets</button>
+    <button onclick="nav('profile');toggleHamburger()" style="display:block;width:100%;text-align:left;background:none;border:none;color:#FAF8F6;font-size:13px;font-family:var(--fs);padding:10px 12px;cursor:pointer;border-radius:8px">Profile</button>
+  </div>
+  <div class="g-nums">
+    <div class="gn"><div class="gn-v" id="g-cal">&#8212;</div><div class="gn-l">Calories</div></div>
+    <div class="gn"><div class="gn-v" id="g-pro">&#8212;</div><div class="gn-l">Protein</div></div>
+    <div class="gn"><div class="gn-v" id="g-carb">&#8212;</div><div class="gn-l">Carbs</div></div>
+    <div class="gn"><div class="gn-v" id="g-fat">&#8212;</div><div class="gn-l">Fat</div></div>
+  </div>
+  <div class="g-form" id="g-form">
+    <div class="gf-grid">
+      <div><div class="gf-l">Daily calories</div><input class="gf-i" type="number" id="gf-cal" placeholder="1800" min="1"/></div>
+      <div><div class="gf-l">Protein (g)</div><input class="gf-i" type="number" id="gf-pro" placeholder="140" min="1"/></div>
+      <div><div class="gf-l">Carbs (g)</div><input class="gf-i" type="number" id="gf-carb" placeholder="175" min="1"/></div>
+      <div><div class="gf-l">Fat (g)</div><input class="gf-i" type="number" id="gf-fat" placeholder="65" min="1"/></div>
+    </div>
+    <button class="gf-save" onclick="saveGoals()">Save targets</button>
   </div>
 </div>
 <div class="screen active" id="sc-home">
-  <div class="goals-bar" style="background:linear-gradient(135deg,var(--cr) 0%,#8B1A19 100%)">
-    <div class="g-hdr"><div class="g-title" id="g-title-lbl">My weekly targets</div><button class="g-edit" onclick="toggleGF()">Edit</button><button class="g-edit" onclick="nav('profile')" style="margin-left:6px">Profile</button></div>
-    <div class="g-nums">
-      <div class="gn"><div class="gn-v" id="g-cal">&#8212;</div><div class="gn-l">Calories</div></div>
-      <div class="gn"><div class="gn-v" id="g-pro">&#8212;</div><div class="gn-l">Protein</div></div>
-      <div class="gn"><div class="gn-v" id="g-carb">&#8212;</div><div class="gn-l">Carbs</div></div>
-      <div class="gn"><div class="gn-v" id="g-fat">&#8212;</div><div class="gn-l">Fat</div></div>
-    </div>
-    <div class="g-form" id="g-form">
-      <div class="gf-grid">
-        <div><div class="gf-l">Daily calories</div><input class="gf-i" type="number" id="gf-cal" placeholder="1800" min="1"/></div>
-        <div><div class="gf-l">Protein (g)</div><input class="gf-i" type="number" id="gf-pro" placeholder="140" min="1"/></div>
-        <div><div class="gf-l">Carbs (g)</div><input class="gf-i" type="number" id="gf-carb" placeholder="175" min="1"/></div>
-        <div><div class="gf-l">Fat (g)</div><input class="gf-i" type="number" id="gf-fat" placeholder="65" min="1"/></div>
-      </div>
-      <button class="gf-save" onclick="saveGoals()">Save goals</button>
-    </div>
-  </div>
   <div class="body">
     <div class="sl">Quick actions</div>
     <div class="qstrip">
@@ -164,8 +170,9 @@ function buildApp(){
 </div>`;
 }
 
-function tick(){const n=new Date();let h=n.getHours(),m=n.getMinutes();const ap=h>=12?'PM':'AM';h=h%12||12;const el=e('clock');if(el)el.textContent=h+':'+(m<10?'0':'')+m+' '+ap;const gr=n.getHours();const g=e('greeting');if(g)g.textContent=gr<12?'Good morning,':gr<17?'Good afternoon,':'Good evening,';const wn=e('welcome-name');if(wn){const fn=P.name?P.name.split(' ')[0]:'';wn.textContent=fn;}}
+function tick(){const n=new Date();let h=n.getHours(),m=n.getMinutes();const ap=h>=12?'PM':'AM';h=h%12||12;const wn=e('welcome-name');if(wn&&!wn.textContent){const fn=P.name?P.name.split(' ')[0]:'';wn.textContent=fn;}}
 function togglePW(elOrId,btn){const inp=typeof elOrId==='string'?e(elOrId):elOrId;if(!inp)return;inp.type=inp.type==='password'?'text':'password';btn.textContent=inp.type==='password'?'👁':'🔒';}
+function toggleHamburger(){var m=e('hamburger-menu');if(m)m.style.display=m.style.display==='none'?'block':'none';}
 function showV(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));const el=e('v-'+id);if(el)el.classList.add('active');}
 function showLogin(){P={cal:0,pro:0,carb:0,fat:0,meals:3,snacks:1,units:'us',name:'',email:'',password:'',prefs:'',firstLogin:false};showV('login');}
 function showAdmin(){ld();showV('admin');renderClients();}
@@ -247,7 +254,7 @@ function hideTTd(id){setTimeout(()=>hideTT(id),300);}
 
 function toggleGF(){e('g-form').classList.toggle('show');}
 function saveGoals(){const c=parseInt((e('gf-cal')||{}).value)||0;if(c<1){alert('Please enter a valid calorie target.');return;}P.cal=c;P.pro=parseInt((e('gf-pro')||{}).value)||0;P.carb=parseInt((e('gf-carb')||{}).value)||0;P.fat=parseInt((e('gf-fat')||{}).value)||0;updG();e('g-form').classList.remove('show');MV=Array(P.meals+P.snacks).fill(null).map(()=>({p:0,c:0,f:0}));sv();}
-function updG(){['cal','pro','carb','fat'].forEach(k=>{const el=e('g-'+k);if(el)el.textContent=P[k]?(P[k]+(k!=='cal'?'g':'')):'&#8212;';});if(P.cal){const gc=e('gf-cal');if(gc)gc.value=P.cal;const ct=e('ci-ct');if(ct)ct.value=P.cal;}if(P.pro){const gp=e('gf-pro');if(gp)gp.value=P.pro;const pt=e('ci-pt');if(pt)pt.value=P.pro;}if(P.carb){const gc2=e('gf-carb');if(gc2)gc2.value=P.carb;}if(P.fat){const gf=e('gf-fat');if(gf)gf.value=P.fat;}}
+function updG(){['cal','pro','carb','fat'].forEach(k=>{const el=e('g-'+k);if(el)el.textContent=P[k]?(P[k]+(k!=='cal'?'g':'')):'&#8212;';});if(P.cal){const gc=e('gf-cal');if(gc)gc.value=P.cal;const ct=e('ci-ct');if(ct)ct.value=P.cal;}if(P.pro){const gp=e('gf-pro');if(gp)gp.value=P.pro;const pt=e('ci-pt');if(pt)pt.value=P.pro;}if(P.carb){const gc2=e('gf-carb');if(gc2)gc2.value=P.carb;}if(P.fat){const gf=e('gf-fat');if(gf)gf.value=P.fat;}const wn=e('welcome-name');if(wn&&P.name){wn.textContent=P.name.split(' ')[0];}}
 function toggleCI(){const el=e('ci-wrap');el.style.display=el.style.display==='none'?'block':'none';}
 function evalIns(){
   const aC=parseInt((e('ci-cal')||{}).value)||0;const aP=parseInt((e('ci-pro')||{}).value)||0;
@@ -564,3 +571,4 @@ try{buildApp();}catch(err){document.getElementById("APP_ROOT").innerHTML='<div s
 ld();
 tick();setInterval(tick,10000);
 if(P.name&&P.email&&!P.firstLogin){showV('app');updG();nav('home');}else{showV('login');}
+document.addEventListener('click',function(ev){var m=e('hamburger-menu');var b=e('hamburger-btn');if(m&&m.style.display!=='none'&&!m.contains(ev.target)&&ev.target!==b&&!b.contains(ev.target))m.style.display='none';});
